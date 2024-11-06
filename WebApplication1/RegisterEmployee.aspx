@@ -13,7 +13,7 @@
     <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control"></asp:DropDownList>
     <asp:Button ID="btn_crear" runat="server" CssClass="btn btn-success" Text="Crear con js" />
     <asp:Button ID="btn_borrar" runat="server" CssClass="btn btn-danger" Text="Borrar" />
-    <asp:Button ID="btn_editar" runat="server" CssClass="btn btn-info" Text="crear con c#" OnClick="CreateEmployee" />
+    <asp:Button ID="btn_editar" runat="server" CssClass="btn btn-info" Text="crear con c#" OnClick="CreateEmployee" OnClientClick="return false;" />
 
     <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table" DataKeyNames="id,id_puesto" GridLines="None" RowHeaderColumn="puesto" Width="301px">
         <Columns>
