@@ -27,6 +27,7 @@ namespace WebApplication1.App_Data
                         //DateOfBrith = request.date_of_birth,
                         //Position = request.position,
 
+                        //esto solo debería estar en capturar_etiquetasASP
 
                         Name = "alan2",
                         LastName = "erriu2",
