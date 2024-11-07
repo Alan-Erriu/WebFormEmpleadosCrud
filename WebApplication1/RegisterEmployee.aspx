@@ -2,7 +2,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Formulario Empleados</h3>
     <asp:Label ID="lbl_nombre" runat="server" Text="Ingrese su nombre"></asp:Label>
+    <asp:Label ID="lbl_error" runat="server" ForeColor="Red" Visible="false"></asp:Label>
     <asp:TextBox ID="txt_nombre" runat="server" CssClass="form-control" placeholder="E001"></asp:TextBox>
+    <asp:RequiredFieldValidator 
+    ID="rfv_nombre" 
+    runat="server" 
+    ControlToValidate="txt_nombre" 
+    InitialValue="" 
+    ErrorMessage="El nombre es obligatorio" 
+    ForeColor ="Red"
+    ValidationGroup="employeeForm" 
+        />
+    <br />
     <asp:Label ID="lbl_apellido" runat="server" Text="Ingrese su apellido"></asp:Label>
     <asp:TextBox ID="txt_apellido" runat="server" CssClass="form-control" placeholder="E001"></asp:TextBox>
     <asp:Label ID="lbl_numero_celular" runat="server" Text="Ingrese su número celular"></asp:Label>
@@ -11,9 +22,15 @@
     <asp:TextBox ID="txt_fecha_nacimiento" runat="server" CssClass="form-control" placeholder="yyyy-dd-mm" TextMode="date"></asp:TextBox>
     <asp:Label ID="Label1" runat="server" Text="Ingrese su puesto"></asp:Label>
     <asp:DropDownList ID="txt_puesto" runat="server" CssClass="form-control"></asp:DropDownList>
-    <asp:Button ID="btn_crear" runat="server" CssClass="btn btn-success" Text="Crear con js" OnClick="btn_crear_Click"  />
+    <asp:Button ID="btn_crear"
+        runat="server" CssClass="btn btn-success" 
+        Text="Crear nuevo empleado" OnClick="btn_crear_Click" 
+        OnClientClick="return confirm('¿Está seguro de que quiere crear?');" 
+        CausesValidation="true"
+        ValidationGroup="employeeForm" 
+        />
     <asp:Button ID="btn_borrar" runat="server" CssClass="btn btn-danger" Text="Borrar" />
-    <asp:Button ID="btn_editar" runat="server" CssClass="btn btn-info" Text="crear con c#"  />
+ 
 
     <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px">
         <Columns>
@@ -36,14 +53,5 @@
         <SortedDescendingCellStyle BackColor="#D6DFDF" />
         <SortedDescendingHeaderStyle BackColor="#002876" />
     </asp:GridView>
-
-    <script type="text/javascript">
-        function RegisterEmployee() {
-            let name2 = document.getElementById("<%= txt_nombre.ClientID %>").value;
-            var name = document.getElementById("txt_nombre").value;
-            console.log("testeando el dom");
-            alert("nombre: " + name2);
-        }
-    </script>
 </asp:Content>
 

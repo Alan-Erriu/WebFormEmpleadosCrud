@@ -24,6 +24,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lbl_nombre;
 
         /// <summary>
+        /// Control lbl_error.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_error;
+
+        /// <summary>
         /// Control txt_nombre.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_nombre;
+
+        /// <summary>
+        /// Control rfv_nombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv_nombre;
 
         /// <summary>
         /// Control lbl_apellido.
@@ -121,15 +139,6 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_borrar;
-
-        /// <summary>
-        /// Control btn_editar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_editar;
 
         /// <summary>
         /// Control grid_empleados.
