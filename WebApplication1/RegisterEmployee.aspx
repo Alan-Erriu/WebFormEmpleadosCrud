@@ -8,22 +8,22 @@
     <asp:Label ID="lbl_numero_celular" runat="server" Text="Ingrese su número celular"></asp:Label>
     <asp:TextBox ID="txt_numero_celular" runat="server" CssClass="form-control" placeholder="11235878454" TextMode="Number"></asp:TextBox>
     <asp:Label ID="lbl_fn" runat="server" Text="Ingrese su fecha de nacimiento"></asp:Label>
-    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="yyyy-dd-mm" TextMode="date"></asp:TextBox>
+    <asp:TextBox ID="txt_fecha_nacimiento" runat="server" CssClass="form-control" placeholder="yyyy-dd-mm" TextMode="date"></asp:TextBox>
     <asp:Label ID="Label1" runat="server" Text="Ingrese su puesto"></asp:Label>
-    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control"></asp:DropDownList>
-    <asp:Button ID="btn_crear" runat="server" CssClass="btn btn-success" Text="Crear con js" />
+    <asp:DropDownList ID="txt_puesto" runat="server" CssClass="form-control"></asp:DropDownList>
+    <asp:Button ID="btn_crear" runat="server" CssClass="btn btn-success" Text="Crear con js" OnClick="btn_crear_Click"  />
     <asp:Button ID="btn_borrar" runat="server" CssClass="btn btn-danger" Text="Borrar" />
-    <asp:Button ID="btn_editar" runat="server" CssClass="btn btn-info" Text="crear con c#" OnClick="CreateEmployee" />
+    <asp:Button ID="btn_editar" runat="server" CssClass="btn btn-info" Text="crear con c#"  />
 
-    <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table" DataKeyNames="id,id_puesto" GridLines="None" RowHeaderColumn="puesto" Width="301px">
+    <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px">
         <Columns>
             <asp:CommandField ShowSelectButton="True" />
             <asp:CommandField ShowDeleteButton="True" />
-            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
-            <asp:BoundField DataField="apellido" HeaderText="Apellido" />
-            <asp:BoundField DataField="numero_celular" HeaderText="Numero Celular" />
-            <asp:BoundField DataField="fecha_nacimiento" HeaderText="Fecha nacimiento" />
-            <asp:BoundField DataField="puesto" HeaderText="Puesto" />
+            <asp:BoundField DataField="name" HeaderText="Nombre" />
+            <asp:BoundField DataField="last_name" HeaderText="Apellido" />
+            <asp:BoundField DataField="user_id" HeaderText="Numero Celular" />
+            <asp:BoundField DataField="date_of_birth" HeaderText="Fecha nacimiento" />
+            <asp:BoundField DataField="position" HeaderText="Puesto" />
             <asp:BoundField />
         </Columns>
         <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />

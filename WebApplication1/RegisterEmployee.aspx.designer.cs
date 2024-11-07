@@ -78,13 +78,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lbl_fn;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control txt_fecha_nacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox txt_fecha_nacimiento;
 
         /// <summary>
         /// Control Label1.
@@ -96,13 +96,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control txt_puesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList txt_puesto;
 
         /// <summary>
         /// Control btn_crear.

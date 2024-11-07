@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Data.SqlClient;
+using WebApplication1.App_Entities.Request;
 
 namespace WebApplication1.App_Data
 {
@@ -9,9 +10,9 @@ namespace WebApplication1.App_Data
         //pasar al settings.json
         private string _connectionString = @"data source=DESKTOP-KCGGJDV\SQLEXPRESS;initial Catalog=ejemplo; Integrated Security=True;";
 
-        private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, position) values(@Name,@LastName, @PhoneNumber,@Position)";
+        private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@Position)";
 
-        public /*async Task*/void CreateNewEmployee(/*CreateEmployeeRequest request*/)
+        public /*async Task*/void CreateNewEmployee(CreateEmployeeRequest request)
         {
 
             try
@@ -21,19 +22,11 @@ namespace WebApplication1.App_Data
                 {
                     var parameters = new
                     {
-                        //Name = request.name,
-                        //LastName = request.last_name,
-                        //PhoneNumber = request.phone_number,
-                        //DateOfBrith = request.date_of_birth,
-                        //Position = request.position,
-
-                        //testeando git
-
-                        //esto solo debería estar en master
-                        Name = "alan2",
-                        LastName = "erriu2",
-                        PhoneNumber = "1123699873",
-                        Position = "dev",
+                        Name = request.name,
+                        LastName = request.last_name,
+                        PhoneNumber = request.phone_number,
+                        DateOfBrith = request.date_of_birth,
+                        Position = request.position,
                     };
                     connect.Execute(_insertNewEmployeeQuery, parameters);
 
