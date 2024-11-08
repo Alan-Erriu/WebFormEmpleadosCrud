@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Services;
+using WebApplication1.App_Entities.Request;
 
 namespace WebApplication1
 {
@@ -10,10 +11,10 @@ namespace WebApplication1
 
         }
         [WebMethod]
-        public static string HandleLogin()
+        public static string HandleLogin(LoginRequest credentials)
         {
 
-            return "email";
+            return credentials.Email;
         }
 
     }

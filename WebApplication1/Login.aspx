@@ -18,12 +18,18 @@
         document.getElementById("btn_login").addEventListener("click", function (event) {
             event.preventDefault();
             
-              let  emailUser= document.getElementById("useremail")
-             
+            let emailUser = document.getElementById("useremail");
+            let password = document.getElementById("password");
+            
+            const credentialsData = {
+                email,
+                password
+            }
+            
 
             fetch("Login.aspx/HandleLogin", {
                 method: "POST",
-               
+                data: JSON.stringify({ credentials: credentialsData }),
                 headers: {
                     "Content-Type": "application/json;charset=utf-8"
                 }})
