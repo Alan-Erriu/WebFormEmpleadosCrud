@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegisterEmployee.aspx.cs" Inherits="WebApplication1.WebForm1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h2 id="emailUserTitle"></h2>
+    <br />
     <h3>Formulario Empleados</h3>
     <asp:Label ID="lbl_nombre" runat="server" Text="Ingrese su nombre"></asp:Label>
     <asp:Label ID="lbl_error" runat="server" ForeColor="Red" Visible="false"></asp:Label>
@@ -53,5 +55,10 @@
         <SortedDescendingCellStyle BackColor="#D6DFDF" />
         <SortedDescendingHeaderStyle BackColor="#002876" />
     </asp:GridView>
+    <script>
+        var emailSesion = localStorage.getItem("emailClient")
+        document.getElementById("emailUserTitle").innerText = "Usuario: "+" "+ emailSesion;
+    </script>
+
 </asp:Content>
 

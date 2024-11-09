@@ -18,33 +18,40 @@
         document.getElementById("btn_login").addEventListener("click", function (event) {
             event.preventDefault();
             
-            let emailUser = document.getElementById("useremail");
-            let password = document.getElementById("password");
-            
+            let emailInput = document.getElementById("useremail").value;
+            let passwordInput = document.getElementById("password").value;
+
+            if (emailInput === "" || passwordInput === "") return alert("Ambos campos son requeridos")
             const credentialsData = {
-                email,
-                password
+                client_email:emailInput,
+                client_password:passwordInput
             }
-            
+            try{
 
             fetch("Login.aspx/HandleLogin", {
                 method: "POST",
-                data: JSON.stringify({ credentials: credentialsData }),
+                body: JSON.stringify({ credentials: credentialsData }),
                 headers: {
                     "Content-Type": "application/json;charset=utf-8"
                 }})
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        throw new Error(`HTTP error! status: ${response}`);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data.d); 
+                    alert("Ingreso exitoso" + " " + data.d.client_email)
+                    localStorage.setItem("emailClient", data.d.client_email)
+                    window.location.href = "/RegisterEmployee";
                 })
                 .catch(error => {
+                    alert("Email o Contraseña incorrecta")
                     console.log("Error:", error);
                 });
+            } catch (ex) {
+                console.log(ex)
+            }
         });
      
     </script>
