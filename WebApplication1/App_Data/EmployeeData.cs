@@ -16,7 +16,10 @@ namespace WebApplication1.App_Data
         private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@Position)";
         private string _selectEmployees = @"SELECT * FROM [users] where status = 1";
 
-        private string _sqlUpdateStatusEmployee = "UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
+        private string _updateStatusEmployee = @"UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
+
+        private string _updateEmployee = "UPDATE [users] SET name = @Name, last_name = @LastName, phone_number = @PhoneNumber, date_of_birth = @Date, position = @Position WHERE user_id = @UserId";
+
         public int CreateNewEmployee(CreateEmployeeRequest request)
         {
 
@@ -109,7 +112,26 @@ namespace WebApplication1.App_Data
             };
             using (var connection = new SqlConnection(_connectionString))
             {
-                var rowsAffected = connection.Execute(_sqlUpdateStatusEmployee, parameters);
+                var rowsAffected = connection.Execute(_updateStatusEmployee, parameters);
+                return rowsAffected;
+            }
+        }
+
+        public int UpdateEmployeeData(Employee employee)
+        {
+
+            var parameters = new
+            {
+                UserId = employee.user_id,
+                Name = employee.name,
+                LastName = employee.last_name,
+                PhoneNumber = employee.phone_number,
+                Date = employee.date_of_birth,
+                Position = employee.position,
+            };
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var rowsAffected = connection.Execute(_updateEmployee, parameters);
                 return rowsAffected;
             }
         }

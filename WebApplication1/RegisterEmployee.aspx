@@ -31,6 +31,14 @@
         CausesValidation="true"
         ValidationGroup="employeeForm" 
         />
+     <asp:Button ID="Button2"
+     runat="server" CssClass="btn bs-tooltip-top" 
+     Text="Editar empleado" OnClick="btn_editar_Click" 
+     OnClientClick="return confirm('¿Está seguro de que quiere actualizar?');" 
+     CausesValidation="true"
+     ValidationGroup="employeeForm" 
+     />
+ 
  
 
     <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" 
