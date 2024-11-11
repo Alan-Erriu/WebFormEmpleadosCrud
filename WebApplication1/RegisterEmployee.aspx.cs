@@ -87,10 +87,18 @@ namespace WebApplication1
 
         protected void grid_empleados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            EmployeeData employeeData = new EmployeeData();
-            int userId = Convert.ToInt32(e.Keys["user_id"]);
-            employeeData.UpdateStatusEmployee(userId);
-            updateEmployeesGrid();
+            try
+            {
+                EmployeeData employeeData = new EmployeeData();
+                int userId = Convert.ToInt32(e.Keys["user_id"]);
+                employeeData.UpdateStatusEmployee(userId);
+                updateEmployeesGrid();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
     }
