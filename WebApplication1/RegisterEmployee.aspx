@@ -35,9 +35,11 @@
 
     <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" 
         BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px" 
-        OnRowDeleting="grid_empleados_RowDeleting" DataKeyNames="user_id"   >
+        OnRowDeleting="grid_empleados_RowDeleting" DataKeyNames="user_id" OnSelectedIndexChanged="grid_empleados_SelectedIndexChanged"   >
         <Columns>
+            <asp:CommandField ShowSelectButton="True" />
             <asp:CommandField ShowDeleteButton="True" />
+            <asp:BoundField DataField="user_id" HeaderText="ID" />
             <asp:BoundField DataField="name" HeaderText="Nombre" />
             <asp:BoundField DataField="last_name" HeaderText="Apellido" />
             <asp:BoundField DataField="user_id" HeaderText="Numero Celular" />

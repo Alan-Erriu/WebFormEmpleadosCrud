@@ -101,5 +101,16 @@ namespace WebApplication1
             }
         }
 
+        protected void grid_empleados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var dataTime = new DateTime();
+            var userId = grid_empleados.SelectedRow.Cells[2].Text;
+            txt_nombre.Text = grid_empleados.SelectedRow.Cells[3].Text; // 4 veces esto
+            txt_apellido.Text = grid_empleados.SelectedRow.Cells[4].Text;
+            txt_numero_celular.Text = grid_empleados.SelectedRow.Cells[5].Text;
+            txt_fecha_nacimiento.Text = Convert.ToDateTime(grid_empleados.SelectedRow.Cells[6].Text).ToString("yyyy-MM-dd");
+            //txt_fecha_nacimiento = grid_empleados.SelectedRow.Cells[6].Text; 
+
+        }
     }
 }
