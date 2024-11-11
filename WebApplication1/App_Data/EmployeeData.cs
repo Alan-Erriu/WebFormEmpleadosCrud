@@ -14,7 +14,9 @@ namespace WebApplication1.App_Data
         private string _connectionString = @"data source=DESKTOP-KCGGJDV\SQLEXPRESS;initial Catalog=ejemplo; Integrated Security=True;";
 
         private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@Position)";
-        private string _selectEmployees = @"SELECT * FROM [users]";
+        private string _selectEmployees = @"SELECT * FROM [users] where status = 1";
+
+        private string _sqlUpdateStatusEmployee = "UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
         public int CreateNewEmployee(CreateEmployeeRequest request)
         {
 
@@ -96,6 +98,20 @@ namespace WebApplication1.App_Data
                 return listEmployees;
             }
 
+        }
+
+        public int UpdateStatusEmployee(int user_id)
+        {
+            var parameters = new
+            {
+                UserId = user_id,
+                StatusUser = 0
+            };
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var rowsAffected = connection.Execute(_sqlUpdateStatusEmployee, parameters);
+                return rowsAffected;
+            }
         }
     }
 }

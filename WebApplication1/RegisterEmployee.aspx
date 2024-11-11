@@ -31,12 +31,12 @@
         CausesValidation="true"
         ValidationGroup="employeeForm" 
         />
-    <asp:Button ID="btn_borrar" runat="server" CssClass="btn btn-danger" Text="Borrar" />
  
 
-    <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px">
+    <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" 
+        BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px" 
+        OnRowDeleting="grid_empleados_RowDeleting" DataKeyNames="user_id"   >
         <Columns>
-            <asp:CommandField ShowSelectButton="True" />
             <asp:CommandField ShowDeleteButton="True" />
             <asp:BoundField DataField="name" HeaderText="Nombre" />
             <asp:BoundField DataField="last_name" HeaderText="Apellido" />

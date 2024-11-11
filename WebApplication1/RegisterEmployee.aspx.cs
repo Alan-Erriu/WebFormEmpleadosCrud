@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using WebApplication1.App_Data;
 using WebApplication1.App_Entities.Model;
 using WebApplication1.App_Entities.Request;
@@ -83,5 +84,14 @@ namespace WebApplication1
             txt_numero_celular.Text = "";
             txt_fecha_nacimiento.Text = "";
         }
+
+        protected void grid_empleados_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            EmployeeData employeeData = new EmployeeData();
+            int userId = Convert.ToInt32(e.Keys["user_id"]);
+            employeeData.UpdateStatusEmployee(userId);
+            updateEmployeesGrid();
+        }
+
     }
 }

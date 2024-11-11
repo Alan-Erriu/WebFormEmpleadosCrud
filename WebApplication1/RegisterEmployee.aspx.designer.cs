@@ -132,15 +132,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btn_crear;
 
         /// <summary>
-        /// Control btn_borrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_borrar;
-
-        /// <summary>
         /// Control grid_empleados.
         /// </summary>
         /// <remarks>
