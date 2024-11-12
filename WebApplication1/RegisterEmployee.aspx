@@ -50,8 +50,8 @@
             <asp:BoundField DataField="user_id" HeaderText="ID" />
             <asp:BoundField DataField="name" HeaderText="Nombre" />
             <asp:BoundField DataField="last_name" HeaderText="Apellido" />
-            <asp:BoundField DataField="user_id" HeaderText="Numero Celular" />
-            <asp:BoundField DataField="date_of_birth" HeaderText="Fecha nacimiento" />
+            <asp:BoundField DataField="phone_number" HeaderText="Numero Celular" />
+            <asp:BoundField DataField="date_of_birth" HeaderText="Fecha nacimiento" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
             <asp:BoundField DataField="position" HeaderText="Puesto" />
             <asp:BoundField />
         </Columns>

@@ -117,19 +117,27 @@ namespace WebApplication1
 
         protected void btn_editar_Click(object sender, EventArgs e)
         {
-            var userId = int.Parse((grid_empleados.SelectedRow.Cells[2].Text));
-            var employedFromInputs = new Employee()
+            try
             {
-                user_id = userId,
-                name = txt_nombre.Text,
-                last_name = txt_apellido.Text,
-                phone_number = txt_numero_celular.Text,
-                date_of_birth = Convert.ToDateTime(txt_fecha_nacimiento.Text),
-                position = txt_puesto.Text
-            };
-            EmployeeData employeeData = new EmployeeData();
-            employeeData.UpdateEmployeeData(employedFromInputs);
-            updateEmployeesGrid();
+
+                var userId = int.Parse((grid_empleados.SelectedRow.Cells[2].Text));
+                var employedFromInputs = new Employee()
+                {
+                    user_id = userId,
+                    name = txt_nombre.Text,
+                    last_name = txt_apellido.Text,
+                    phone_number = txt_numero_celular.Text,
+                    date_of_birth = Convert.ToDateTime(txt_fecha_nacimiento.Text),
+                    position = txt_puesto.Text
+                };
+                EmployeeData employeeData = new EmployeeData();
+                employeeData.UpdateEmployeeData(employedFromInputs);
+                updateEmployeesGrid();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
