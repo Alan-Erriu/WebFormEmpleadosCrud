@@ -23,7 +23,7 @@
     <asp:Label ID="lbl_fn" runat="server" Text="Ingrese su fecha de nacimiento"></asp:Label>
     <asp:TextBox ID="txt_fecha_nacimiento" runat="server" CssClass="form-control" placeholder="yyyy-dd-mm" TextMode="date"></asp:TextBox>
     <asp:Label ID="Label1" runat="server" Text="Ingrese su puesto"></asp:Label>
-    <asp:DropDownList ID="txt_puesto" runat="server" CssClass="form-control"></asp:DropDownList>
+    <asp:DropDownList ID="ddl_puestos" runat="server" CssClass="form-control" ></asp:DropDownList>
     <asp:Button ID="btn_crear"
         runat="server" CssClass="btn btn-success" 
         Text="Crear nuevo empleado" OnClick="btn_crear_Click" 

@@ -17,17 +17,17 @@ namespace WebApplication1
             if (!IsPostBack)
             {
 
-                List<string> listPosition = new List<string>();
-                for (int i = 0; i < 10; i++)
-                {
-                    listPosition.Add("jefe de planta" + i.ToString());
-                }
+                var listPosition = _employeeData.GetAllPosition();
+
+                ddl_puestos.DataSource = listPosition;
+                ddl_puestos.DataValueField = "position_id";
+                ddl_puestos.DataTextField = "description";
+                ddl_puestos.DataBind();
                 //ddl_puesto
                 //txt_puesto.DataValueField aca el id
                 //txt_puesto.DataTextField lista de string (descripcion)
                 //txt_puesto.DataSource = listPosition;
 
-                txt_puesto.DataBind();
                 updateEmployeesGrid();
             }
         }
@@ -65,7 +65,7 @@ namespace WebApplication1
                 last_name = txt_apellido.Text,
                 phone_number = txt_numero_celular.Text,
                 date_of_birth = date_of_birth,
-                position = txt_puesto.SelectedItem.Text
+                position_id = int.Parse(ddl_puestos.SelectedValue)
             };
 
 
@@ -129,7 +129,7 @@ namespace WebApplication1
             txt_apellido.Text = grid_empleados.SelectedRow.Cells[4].Text;
             txt_numero_celular.Text = grid_empleados.SelectedRow.Cells[5].Text;
             txt_fecha_nacimiento.Text = Convert.ToDateTime(grid_empleados.SelectedRow.Cells[6].Text).ToString("yyyy-MM-dd");
-            txt_puesto.Text = grid_empleados.SelectedRow.Cells[7].Text;
+            ddl_puestos.Text = grid_empleados.SelectedRow.Cells[7].Text;
 
 
 
@@ -149,7 +149,7 @@ namespace WebApplication1
                     last_name = txt_apellido.Text,
                     phone_number = txt_numero_celular.Text,
                     date_of_birth = Convert.ToDateTime(txt_fecha_nacimiento.Text),
-                    position = txt_puesto.Text
+                    position_id = int.Parse(ddl_puestos.DataValueField)
                 };
                 EmployeeData employeeData = new EmployeeData();
                 employeeData.UpdateEmployeeData(employedFromInputs);

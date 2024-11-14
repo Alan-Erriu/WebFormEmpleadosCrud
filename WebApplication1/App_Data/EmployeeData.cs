@@ -13,13 +13,15 @@ namespace WebApplication1.App_Data
 
         private string _connectionString = @"data source=DESKTOP-KCGGJDV\SQLEXPRESS;initial Catalog=ejemplo; Integrated Security=True;";
 
-        private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@Position)";
+        private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position_id) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@PositionId)";
+
         private string _selectEmployees = @"SELECT * FROM [users] where status = 1";
 
         private string _updateStatusEmployee = @"UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
 
-        private string _updateEmployee = "UPDATE [users] SET name = @Name, last_name = @LastName, phone_number = @PhoneNumber, date_of_birth = @Date, position = @Position WHERE user_id = @UserId";
+        private string _updateEmployee = "UPDATE [users] SET name = @Name, last_name = @LastName, phone_number = @PhoneNumber, date_of_birth = @Date, position_id = @Position WHERE user_id = @UserId";
 
+        private string _selectAllPosition = @"select position_id, description from [position]";
         public int CreateNewEmployee(CreateEmployeeRequest request)
         {
 
@@ -34,7 +36,7 @@ namespace WebApplication1.App_Data
                         LastName = request.last_name,
                         PhoneNumber = request.phone_number,
                         DateOfBrith = request.date_of_birth,
-                        Position = request.position,
+                        PositionId = request.position_id,
                     };
                     var rowsAffected = connect.Execute(_insertNewEmployeeQuery, parameters);
                     return rowsAffected;
@@ -54,6 +56,7 @@ namespace WebApplication1.App_Data
             }
 
         }
+
 
         public List<Employee> GetAllEmployees()
         {
@@ -79,7 +82,7 @@ namespace WebApplication1.App_Data
                                 employeed.date_of_birth = dr["date_of_birth"] != DBNull.Value
                                 ? Convert.ToDateTime(dr["date_of_birth"])
                                 : DateTime.MinValue;
-                                employeed.position = dr["position"].ToString();
+                                employeed.position_id = int.Parse((dr["position_id"].ToString()));
                                 listEmployees.Add(employeed);
                             }
 
@@ -99,6 +102,49 @@ namespace WebApplication1.App_Data
             {
                 Console.WriteLine(ex.Message);
                 return listEmployees;
+            }
+
+        }
+
+        public List<Position> GetAllPosition()
+        {
+
+            var listPosition = new List<Position>();
+            try
+            {
+
+                using (var connect = new SqlConnection(_connectionString))
+                {
+                    connect.Open();
+                    using (var command = new SqlCommand(_selectAllPosition, connect))
+                    {
+                        using (var dr = command.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                var position = new Position();
+                                position.position_id = int.Parse((dr["position_id"].ToString()));
+                                position.description = dr["description"].ToString();
+
+                                listPosition.Add(position);
+                            }
+
+                            return listPosition;
+                        }
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return listPosition;
+            }
+            catch (Exception ex)
+
+            {
+                Console.WriteLine(ex.Message);
+                return listPosition;
             }
 
         }
@@ -127,7 +173,7 @@ namespace WebApplication1.App_Data
                 LastName = employee.last_name,
                 PhoneNumber = employee.phone_number,
                 Date = employee.date_of_birth,
-                Position = employee.position,
+                Position = employee.position_id,
             };
             using (var connection = new SqlConnection(_connectionString))
             {

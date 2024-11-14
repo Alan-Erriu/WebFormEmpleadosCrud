@@ -114,13 +114,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control txt_puesto.
+        /// Control ddl_puestos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList txt_puesto;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_puestos;
 
         /// <summary>
         /// Control btn_crear.
