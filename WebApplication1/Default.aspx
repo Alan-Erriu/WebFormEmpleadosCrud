@@ -12,10 +12,9 @@
             <section class="col-md-4" aria-labelledby="gettingStartedTitle">
                 <h2 id="gettingStartedTitle">Inicie sesión para continuar </h2>              
                 <p>
-                    <a class="btn btn-default" href="/Login">Learn more &raquo;</a>
+                    <a class="btn btn-default" href="/Login">Iniciar sesión &raquo;</a>
                 </p>
             </section>
-      
         </div>
     </main>
 

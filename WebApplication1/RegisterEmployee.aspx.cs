@@ -22,8 +22,11 @@ namespace WebApplication1
                 {
                     listPosition.Add("jefe de planta" + i.ToString());
                 }
+                //ddl_puesto
+                //txt_puesto.DataValueField aca el id
+                //txt_puesto.DataTextField lista de string (descripcion)
+                //txt_puesto.DataSource = listPosition;
 
-                txt_puesto.DataSource = listPosition;
                 txt_puesto.DataBind();
                 updateEmployeesGrid();
             }
@@ -85,6 +88,22 @@ namespace WebApplication1
             txt_fecha_nacimiento.Text = "";
         }
 
+        //1 busca de que tipo es la fila (botones, texto etc)
+        //2 busca por celdas []rows[]colum, ahi tiene que estar si o si el boton eliminar
+        //3 si el comando el "delete" agrega un onClick con una funcion js
+        protected void grid_empleados_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton deleteButton = (LinkButton)e.Row.Cells[0].Controls[0];
+
+                if (deleteButton != null && deleteButton.CommandName == "Delete")
+                {
+                    deleteButton.OnClientClick = "return confirm('¿Estás seguro de que deseas eliminar este empleado?');";
+                }
+            }
+        }
+        //modal  preguntar
         protected void grid_empleados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
@@ -100,6 +119,8 @@ namespace WebApplication1
                 Console.WriteLine(ex.Message);
             }
         }
+
+
 
         protected void grid_empleados_SelectedIndexChanged(object sender, EventArgs e)
         {

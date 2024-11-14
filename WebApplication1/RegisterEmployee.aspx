@@ -39,14 +39,14 @@
      ValidationGroup="employeeForm" 
      />
  
- 
+ <!-- hacer tabla puesto id,desc, traerlo con dr, mappear el dropDownList,agregar paginacion al grid, agregar modal al boton eliminar --> 
 
     <asp:GridView ID="grid_empleados" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#3366CC" 
         BorderStyle="Ridge" BorderWidth="1px" CellPadding="4" CssClass="table"  GridLines="None" RowHeaderColumn="puesto" Width="301px" 
-        OnRowDeleting="grid_empleados_RowDeleting" DataKeyNames="user_id" OnSelectedIndexChanged="grid_empleados_SelectedIndexChanged"   >
+        OnRowDeleting="grid_empleados_RowDeleting" DataKeyNames="user_id" OnSelectedIndexChanged="grid_empleados_SelectedIndexChanged" OnRowDataBound="grid_empleados_RowDataBound">
         <Columns>
+            <asp:CommandField ShowDeleteButton="True"/>
             <asp:CommandField ShowSelectButton="True" />
-            <asp:CommandField ShowDeleteButton="True" />
             <asp:BoundField DataField="user_id" HeaderText="ID" />
             <asp:BoundField DataField="name" HeaderText="Nombre" />
             <asp:BoundField DataField="last_name" HeaderText="Apellido" />
