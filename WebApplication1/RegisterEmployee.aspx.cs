@@ -22,10 +22,6 @@ namespace WebApplication1
                 ddl_puestos.DataValueField = "position_id";
                 ddl_puestos.DataTextField = "description";
                 ddl_puestos.DataBind();
-                //ddl_puesto
-                //txt_puesto.DataValueField aca el id
-                //txt_puesto.DataTextField lista de string (descripcion)
-                //txt_puesto.DataSource = listPosition;
 
                 updateEmployeesGrid();
             }
