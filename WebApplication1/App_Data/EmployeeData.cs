@@ -11,24 +11,35 @@ namespace WebApplication1.App_Data
     public class EmployeeData
     {
 
-
+        #region
         private string _connectionString = @"data source=DESKTOP-KCGGJDV\SQLEXPRESS;initial Catalog=ejemplo; Integrated Security=True;";
 
         private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position_id) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@PositionId)";
 
-        private string _selectEmployees =
-         @"SELECT u.user_id,u.name,u.last_name,u.phone_number,u.date_of_birth, p.description FROM [users] u 
-
-          join 
-          [position] p on p.position_id = u.position_id
-
-          where status = 1";
+        private string _selectEmployees = @"
+    SELECT 
+        u.user_id, u.name, u.last_name, u.phone_number, u.date_of_birth, p.description 
+    FROM 
+        [users] u
+    JOIN 
+        [position] p ON p.position_id = u.position_id
+    WHERE 
+        u.status = 1
+    ORDER BY 
+        u.user_id
+    OFFSET 
+        (@PageNumber - 1) * @PageSize ROWS
+    FETCH NEXT 
+        @PageSize ROWS ONLY;";
 
         private string _updateStatusEmployee = @"UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
 
         private string _updateEmployee = "UPDATE [users] SET name = @Name, last_name = @LastName, phone_number = @PhoneNumber, date_of_birth = @Date, position_id = @Position WHERE user_id = @UserId";
 
         private string _selectAllPosition = @"select position_id, description from [position]";
+
+        private string _countTotalEmployees = @"select COUNT(*) from [users] u where u.status = 1";
+        #endregion
         public int CreateNewEmployee(CreateEmployeeRequest request)
         {
 
@@ -64,8 +75,15 @@ namespace WebApplication1.App_Data
 
         }
 
-
-        public List<EmployeeDTO> GetAllEmployees()
+        public int GetTotalEmployeesNumber()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var totalRows = connection.QueryFirstOrDefault<int>(_countTotalEmployees);
+                return totalRows;
+            }
+        }
+        public List<EmployeeDTO> GetAllEmployees(int pageNumber, int pageSize)
         {
 
             var listEmployees = new List<EmployeeDTO>();
@@ -77,6 +95,8 @@ namespace WebApplication1.App_Data
                     connect.Open();
                     using (var command = new SqlCommand(_selectEmployees, connect))
                     {
+                        command.Parameters.AddWithValue("@PageNumber", pageNumber);
+                        command.Parameters.AddWithValue("@PageSize", pageSize);
                         using (var dr = command.ExecuteReader())
                         {
                             while (dr.Read())
@@ -190,3 +210,4 @@ namespace WebApplication1.App_Data
         }
     }
 }
+

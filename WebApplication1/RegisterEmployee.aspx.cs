@@ -22,18 +22,21 @@ namespace WebApplication1
                 ddl_puestos.DataValueField = "position_id";
                 ddl_puestos.DataTextField = "description";
                 ddl_puestos.DataBind();
+                updateEmployeesGrid(1);
 
-                updateEmployeesGrid();
             }
         }
 
 
-        protected void updateEmployeesGrid()
+        protected void updateEmployeesGrid(int pageNumber)
         {
 
             EmployeeData employeeData = new EmployeeData();
-            var list = employeeData.GetAllEmployees();
+
+            grid_empleados.VirtualItemCount = employeeData.GetTotalEmployeesNumber();
+            var list = employeeData.GetAllEmployees(pageNumber, grid_empleados.PageSize);
             grid_empleados.DataSource = list;
+
             grid_empleados.DataBind();
         }
 
@@ -65,7 +68,7 @@ namespace WebApplication1
 
             var rowsAffected = _employeeData.CreateNewEmployee(request);
             if (rowsAffected == 0) return;
-            updateEmployeesGrid();
+            updateEmployeesGrid(1);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "SuccessAlert", "alert('Empleado creado con éxito');", true);
             clearInputs();
 
@@ -105,7 +108,7 @@ namespace WebApplication1
                 EmployeeData employeeData = new EmployeeData();
                 int userId = Convert.ToInt32(e.Keys["user_id"]);
                 employeeData.UpdateStatusEmployee(userId);
-                updateEmployeesGrid();
+                updateEmployeesGrid(1);
 
             }
             catch (Exception ex)
@@ -129,6 +132,18 @@ namespace WebApplication1
 
         }
 
+        protected void grid_empleados_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+            grid_empleados.PageIndex = e.NewPageIndex;
+            //arranca del 0 el index, pasarlo 
+            updateEmployeesGrid(e.NewPageIndex);
+
+
+
+        }
+
+
 
         protected void btn_editar_Click(object sender, EventArgs e)
         {
@@ -147,7 +162,7 @@ namespace WebApplication1
                 };
                 EmployeeData employeeData = new EmployeeData();
                 employeeData.UpdateEmployeeData(employedFromInputs);
-                updateEmployeesGrid();
+                updateEmployeesGrid(1);
             }
             catch (Exception ex)
             {
