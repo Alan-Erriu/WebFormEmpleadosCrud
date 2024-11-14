@@ -52,7 +52,7 @@
             <asp:BoundField DataField="last_name" HeaderText="Apellido" />
             <asp:BoundField DataField="phone_number" HeaderText="Numero Celular" />
             <asp:BoundField DataField="date_of_birth" HeaderText="Fecha nacimiento" DataFormatString="{0:dd/MM/yyyy}" HtmlEncode="false" />
-            <asp:BoundField DataField="position" HeaderText="Puesto" />
+            <asp:BoundField DataField="description" HeaderText="Puesto" />
             <asp:BoundField />
         </Columns>
         <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />

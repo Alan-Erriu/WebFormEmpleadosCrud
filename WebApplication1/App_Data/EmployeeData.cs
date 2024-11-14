@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using WebApplication1.App_Entities.DTOs;
 using WebApplication1.App_Entities.Model;
 using WebApplication1.App_Entities.Request;
 
@@ -15,7 +16,13 @@ namespace WebApplication1.App_Data
 
         private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position_id) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@PositionId)";
 
-        private string _selectEmployees = @"SELECT * FROM [users] where status = 1";
+        private string _selectEmployees =
+         @"SELECT u.user_id,u.name,u.last_name,u.phone_number,u.date_of_birth, p.description FROM [users] u 
+
+          join 
+          [position] p on p.position_id = u.position_id
+
+          where status = 1";
 
         private string _updateStatusEmployee = @"UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
 
@@ -58,10 +65,10 @@ namespace WebApplication1.App_Data
         }
 
 
-        public List<Employee> GetAllEmployees()
+        public List<EmployeeDTO> GetAllEmployees()
         {
 
-            var listEmployees = new List<Employee>();
+            var listEmployees = new List<EmployeeDTO>();
             try
             {
 
@@ -74,7 +81,7 @@ namespace WebApplication1.App_Data
                         {
                             while (dr.Read())
                             {
-                                var employeed = new Employee();
+                                var employeed = new EmployeeDTO();
                                 employeed.user_id = int.Parse((dr["user_id"].ToString()));
                                 employeed.name = dr["name"].ToString();
                                 employeed.last_name = dr["last_name"].ToString();
@@ -82,7 +89,7 @@ namespace WebApplication1.App_Data
                                 employeed.date_of_birth = dr["date_of_birth"] != DBNull.Value
                                 ? Convert.ToDateTime(dr["date_of_birth"])
                                 : DateTime.MinValue;
-                                employeed.position_id = int.Parse((dr["position_id"].ToString()));
+                                employeed.description = (dr["description"].ToString());
                                 listEmployees.Add(employeed);
                             }
 

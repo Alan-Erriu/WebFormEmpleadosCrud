@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.App_Data;
@@ -37,8 +36,7 @@ namespace WebApplication1
         {
 
             EmployeeData employeeData = new EmployeeData();
-            List<Employee> list = new List<Employee>();
-            list = employeeData.GetAllEmployees();
+            var list = employeeData.GetAllEmployees();
             grid_empleados.DataSource = list;
             grid_empleados.DataBind();
         }
@@ -129,7 +127,7 @@ namespace WebApplication1
             txt_apellido.Text = grid_empleados.SelectedRow.Cells[4].Text;
             txt_numero_celular.Text = grid_empleados.SelectedRow.Cells[5].Text;
             txt_fecha_nacimiento.Text = Convert.ToDateTime(grid_empleados.SelectedRow.Cells[6].Text).ToString("yyyy-MM-dd");
-            ddl_puestos.Text = grid_empleados.SelectedRow.Cells[7].Text;
+            ddl_puestos.DataTextField = grid_empleados.SelectedRow.Cells[7].Text;
 
 
 
@@ -149,7 +147,7 @@ namespace WebApplication1
                     last_name = txt_apellido.Text,
                     phone_number = txt_numero_celular.Text,
                     date_of_birth = Convert.ToDateTime(txt_fecha_nacimiento.Text),
-                    position_id = int.Parse(ddl_puestos.DataValueField)
+                    position_id = int.Parse(ddl_puestos.SelectedValue)
                 };
                 EmployeeData employeeData = new EmployeeData();
                 employeeData.UpdateEmployeeData(employedFromInputs);

@@ -190,6 +190,7 @@
     <Compile Include="App_configure\ConnectionSQL.cs" />
     <Compile Include="App_Data\AuthData.cs" />
     <Compile Include="App_Data\EmployeeData.cs" />
+    <Compile Include="App_Entities\DTOs\EmployeeDTO.cs" />
     <Compile Include="App_Entities\Model\Client.cs" />
     <Compile Include="App_Entities\Model\Employee.cs" />
     <Compile Include="App_Entities\Model\Position.cs" />
