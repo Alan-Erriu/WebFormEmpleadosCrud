@@ -137,7 +137,7 @@ namespace WebApplication1
 
             grid_empleados.PageIndex = e.NewPageIndex;
             //arranca del 0 el index, pasarlo 
-            updateEmployeesGrid(e.NewPageIndex);
+            updateEmployeesGrid(e.NewPageIndex + 1);
 
 
 
