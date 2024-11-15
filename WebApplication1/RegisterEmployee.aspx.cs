@@ -37,7 +37,13 @@ namespace WebApplication1
             var list = employeeData.GetAllEmployees(pageNumber, grid_empleados.PageSize);
             grid_empleados.DataSource = list;
 
+            grid_empleados.PageIndex = pageNumber - 1;
             grid_empleados.DataBind();
+
+
+
+
+
         }
 
 
@@ -100,7 +106,7 @@ namespace WebApplication1
                 }
             }
         }
-        //modal  preguntar
+
         protected void grid_empleados_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
@@ -162,7 +168,8 @@ namespace WebApplication1
                 };
                 EmployeeData employeeData = new EmployeeData();
                 employeeData.UpdateEmployeeData(employedFromInputs);
-                updateEmployeesGrid(1);
+                int currentPage = grid_empleados.PageIndex;
+                updateEmployeesGrid(currentPage + 1);
             }
             catch (Exception ex)
             {
