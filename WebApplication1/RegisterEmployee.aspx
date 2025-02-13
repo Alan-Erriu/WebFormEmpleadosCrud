@@ -9,11 +9,12 @@
     <asp:RequiredFieldValidator 
     ID="rfv_nombre" 
     runat="server" 
-    ControlToValidate="txt_nombre" 
+    ControlToValidate="txt_nombre"
     InitialValue="" 
     ErrorMessage="El nombre es obligatorio" 
     ForeColor ="Red"
     ValidationGroup="employeeForm" 
+       
         />
     <br />
     <asp:Label ID="lbl_apellido" runat="server" Text="Ingrese su apellido"></asp:Label>
@@ -29,7 +30,7 @@
         Text="Crear nuevo empleado" OnClick="btn_crear_Click" 
         OnClientClick="return confirm('¿Está seguro de que quiere crear?');" 
         CausesValidation="true"
-        ValidationGroup="employeeForm" 
+        ValidationGroup="employeeForm"
         />
      <asp:Button ID="Button2"
      runat="server" CssClass="btn bs-tooltip-top" 

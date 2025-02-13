@@ -14,21 +14,20 @@
              <button ID="btn_login">Iniciar sesión</button>
         </div>
     <script>
-   
+        
         document.getElementById("btn_login").addEventListener("click", function (event) {
-            event.preventDefault();
-            
+            event.preventDefault();            
             let emailInput = document.getElementById("useremail").value;
             let passwordInput = document.getElementById("password").value;
 
             if (emailInput === "" || passwordInput === "") return alert("Ambos campos son requeridos")
             const credentialsData = {
-                client_email:emailInput,
-                client_password:passwordInput
+            email:emailInput,
+            contrasena:passwordInput
             }
-            try{
-
-            fetch("Login.aspx/HandleLogin", {
+            console.log(credentialsData)
+            try {
+               fetch("Login.aspx/HandleLogin", {
                 method: "POST",
                 body: JSON.stringify({ credentials: credentialsData }),
                 headers: {
@@ -41,8 +40,8 @@
                     return response.json();
                 })
                 .then(data => {
-                    alert("Ingreso exitoso" + " " + data.d.client_email)
-                    localStorage.setItem("emailClient", data.d.client_email)
+                    alert("Ingreso exitoso" + " " + data.d.email)
+                    localStorage.setItem("emailClient", data.d.email)
                     window.location.href = "/RegisterEmployee";
                 })
                 .catch(error => {

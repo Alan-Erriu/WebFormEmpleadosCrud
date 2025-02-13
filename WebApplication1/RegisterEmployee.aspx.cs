@@ -1,26 +1,28 @@
-﻿using System;
+﻿using Commom.Request;
+using Entities.Models;
+using Data.DAO.Implementation;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WebApplication1.App_Data;
-using WebApplication1.App_Entities.Model;
-using WebApplication1.App_Entities.Request;
+
+
 
 namespace WebApplication1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private EmployeeData _employeeData = new EmployeeData();
+        private readonly EmpleadoDAO employeeData = new EmpleadoDAO();
         //no debería ver esto en la rama master
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
 
-                var listPosition = _employeeData.GetAllPosition();
+                var listPosition = employeeData.GetAllPosition();
 
                 ddl_puestos.DataSource = listPosition;
-                ddl_puestos.DataValueField = "position_id";
-                ddl_puestos.DataTextField = "description";
+                ddl_puestos.DataValueField = "id";
+                ddl_puestos.DataTextField = "descripcion";
                 ddl_puestos.DataBind();
                 updateEmployeesGrid(1);
 
@@ -31,19 +33,12 @@ namespace WebApplication1
         protected void updateEmployeesGrid(int pageNumber)
         {
 
-            EmployeeData employeeData = new EmployeeData();
-
+            
             grid_empleados.VirtualItemCount = employeeData.GetTotalEmployeesNumber();
             var list = employeeData.GetAllEmployees(pageNumber, grid_empleados.PageSize);
             grid_empleados.DataSource = list;
-
             grid_empleados.PageIndex = pageNumber - 1;
             grid_empleados.DataBind();
-
-
-
-
-
         }
 
 
@@ -62,17 +57,17 @@ namespace WebApplication1
             DateTime date_of_birth;
             DateTime.TryParse(txt_fecha_nacimiento.Text, out date_of_birth);
 
-            var request = new CreateEmployeeRequest
+            var request = new CrearEmpleadoRequest
             {
-                name = txt_nombre.Text,
-                last_name = txt_apellido.Text,
-                phone_number = txt_numero_celular.Text,
-                date_of_birth = date_of_birth,
-                position_id = int.Parse(ddl_puestos.SelectedValue)
+                nombre = txt_nombre.Text,
+                apellido = txt_apellido.Text,
+                numero_telefono = txt_numero_celular.Text,
+                fecha_nacimiento = date_of_birth,
+                rol_id = int.Parse(ddl_puestos.SelectedValue)
             };
 
 
-            var rowsAffected = _employeeData.CreateNewEmployee(request);
+            var rowsAffected = employeeData.CreateNewEmployee(request);
             if (rowsAffected == 0) return;
             updateEmployeesGrid(1);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "SuccessAlert", "alert('Empleado creado con éxito');", true);
@@ -111,7 +106,7 @@ namespace WebApplication1
         {
             try
             {
-                EmployeeData employeeData = new EmployeeData();
+               
                 int userId = Convert.ToInt32(e.Keys["user_id"]);
                 employeeData.UpdateStatusEmployee(userId);
                 updateEmployeesGrid(1);
@@ -157,16 +152,16 @@ namespace WebApplication1
             {
 
                 var userId = int.Parse((grid_empleados.SelectedRow.Cells[2].Text));
-                var employedFromInputs = new Employee()
+                var employedFromInputs = new Empleado()
                 {
-                    user_id = userId,
-                    name = txt_nombre.Text,
-                    last_name = txt_apellido.Text,
-                    phone_number = txt_numero_celular.Text,
-                    date_of_birth = Convert.ToDateTime(txt_fecha_nacimiento.Text),
-                    position_id = int.Parse(ddl_puestos.SelectedValue)
+                    id = userId,
+                    nombre = txt_nombre.Text,
+                    apellido = txt_apellido.Text,
+                    numero_telefono = txt_numero_celular.Text,
+                    fecha_nacimiento = Convert.ToDateTime(txt_fecha_nacimiento.Text),
+                    rol_id = int.Parse(ddl_puestos.SelectedValue)
                 };
-                EmployeeData employeeData = new EmployeeData();
+                
                 employeeData.UpdateEmployeeData(employedFromInputs);
                 int currentPage = grid_empleados.PageIndex;
                 updateEmployeesGrid(currentPage + 1);

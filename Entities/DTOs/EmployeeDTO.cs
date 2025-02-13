@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApplication1.App_Entities.DTOs
+namespace Entities.DTOs
 {
     public class EmployeeDTO
     {

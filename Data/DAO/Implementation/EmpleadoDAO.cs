@@ -1,46 +1,48 @@
-﻿using Dapper;
+﻿using Commom.Request;
+using Dapper;
+using Entities.DTOs;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using WebApplication1.App_Entities.DTOs;
-using WebApplication1.App_Entities.Model;
-using WebApplication1.App_Entities.Request;
 
-namespace WebApplication1.App_Data
+
+
+namespace Data.DAO.Implementation
 {
-    public class EmployeeData
+    public class EmpleadoDAO
     {
 
         #region
-        private string _connectionString = @"data source=DESKTOP-KCGGJDV\SQLEXPRESS;initial Catalog=ejemplo; Integrated Security=True;";
+        private string _connectionString = @"data source=DESKTOP-SA7J56I\SQLEXPRESS;initial Catalog=empleados; Integrated Security=True;";
 
-        private string _insertNewEmployeeQuery = @"INSERT INTO [users] (name, last_name, phone_number, date_of_birth,position_id) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@PositionId)";
+        private string _insertNewEmployeeQuery = @"INSERT INTO [empleado] (nombre, apellido, numero_telefono, fecha_nacimiento,rol_id) values(@Name,@LastName, @PhoneNumber,@DateOfBrith,@PositionId)";
 
         private string _selectEmployees = @"
     SELECT 
-        u.user_id, u.name, u.last_name, u.phone_number, u.date_of_birth, p.description 
+        u.id, u.nombre, u.apellido, u.numero_telefono, u.fecha_nacimiento, p.descripcion 
     FROM 
-        [users] u
+        [empleado] u
     JOIN 
-        [position] p ON p.position_id = u.position_id
+        [rol_empleado] p ON p.id = u.id
     WHERE 
         u.status = 1
     ORDER BY 
-        u.user_id
+        u.id
     OFFSET 
         (@PageNumber - 1) * @PageSize ROWS
     FETCH NEXT 
         @PageSize ROWS ONLY;";
 
-        private string _updateStatusEmployee = @"UPDATE [users] SET status = @StatusUser WHERE user_id = @UserId";
+        private string _updateStatusEmployee = @"UPDATE [cliente] SET status = @StatusUser WHERE id = @UserId";
 
-        private string _updateEmployee = "UPDATE [users] SET name = @Name, last_name = @LastName, phone_number = @PhoneNumber, date_of_birth = @Date, position_id = @Position WHERE user_id = @UserId";
+        private string _updateEmployee = "UPDATE [empleado] SET nombre = @Name, apellido = @LastName, numero_telefono = @PhoneNumber, fecha_nacimiento = @Date, rol_id = @Position WHERE id = @UserId";
 
-        private string _selectAllPosition = @"select position_id, description from [position]";
+        private string _selectAllPosition = @"select id, descripcion from [rol_empleado]";
 
-        private string _countTotalEmployees = @"select COUNT(*) from [users] u where u.status = 1";
+        private string _countTotalEmployees = @"select COUNT(*) from [empleado] u where u.status = 1";
         #endregion
-        public int CreateNewEmployee(CreateEmployeeRequest request)
+        public int CreateNewEmployee(CrearEmpleadoRequest request)
         {
 
             try
@@ -50,11 +52,11 @@ namespace WebApplication1.App_Data
                 {
                     var parameters = new
                     {
-                        Name = request.name,
-                        LastName = request.last_name,
-                        PhoneNumber = request.phone_number,
-                        DateOfBrith = request.date_of_birth,
-                        PositionId = request.position_id,
+                        Name = request.nombre,
+                        LastName = request.apellido,
+                        PhoneNumber = request.numero_telefono,
+                        DateOfBrith = request.fecha_nacimiento,
+                        PositionId = request.rol_id,
                     };
                     var rowsAffected = connect.Execute(_insertNewEmployeeQuery, parameters);
                     return rowsAffected;
@@ -102,14 +104,14 @@ namespace WebApplication1.App_Data
                             while (dr.Read())
                             {
                                 var employeed = new EmployeeDTO();
-                                employeed.user_id = int.Parse((dr["user_id"].ToString()));
-                                employeed.name = dr["name"].ToString();
-                                employeed.last_name = dr["last_name"].ToString();
-                                employeed.phone_number = dr["phone_number"].ToString();
-                                employeed.date_of_birth = dr["date_of_birth"] != DBNull.Value
-                                ? Convert.ToDateTime(dr["date_of_birth"])
+                                employeed.user_id = int.Parse((dr["id"].ToString()));
+                                employeed.name = dr["nombre"].ToString();
+                                employeed.last_name = dr["apellido"].ToString();
+                                employeed.phone_number = dr["numero_telefono"].ToString();
+                                employeed.date_of_birth = dr["fecha_nacimiento"] != DBNull.Value
+                                ? Convert.ToDateTime(dr["fecha_nacimiento"])
                                 : DateTime.MinValue;
-                                employeed.description = (dr["description"].ToString());
+                                employeed.description = (dr["descripcion"].ToString());
                                 listEmployees.Add(employeed);
                             }
 
@@ -133,10 +135,10 @@ namespace WebApplication1.App_Data
 
         }
 
-        public List<Position> GetAllPosition()
+        public List<RolEmpleado> GetAllPosition()
         {
 
-            var listPosition = new List<Position>();
+            var listPosition = new List<RolEmpleado>();
             try
             {
 
@@ -149,9 +151,9 @@ namespace WebApplication1.App_Data
                         {
                             while (dr.Read())
                             {
-                                var position = new Position();
-                                position.position_id = int.Parse((dr["position_id"].ToString()));
-                                position.description = dr["description"].ToString();
+                                var position = new RolEmpleado();
+                                position.id = int.Parse((dr["id"].ToString()));
+                                position.descripcion = dr["descripcion"].ToString();
 
                                 listPosition.Add(position);
                             }
@@ -190,17 +192,17 @@ namespace WebApplication1.App_Data
             }
         }
 
-        public int UpdateEmployeeData(Employee employee)
+        public int UpdateEmployeeData(Empleado employee)
         {
 
             var parameters = new
             {
-                UserId = employee.user_id,
-                Name = employee.name,
-                LastName = employee.last_name,
-                PhoneNumber = employee.phone_number,
-                Date = employee.date_of_birth,
-                Position = employee.position_id,
+                UserId = employee.id,
+                Name = employee.nombre,
+                LastName = employee.apellido,
+                PhoneNumber = employee.numero_telefono,
+                Date = employee.fecha_nacimiento,
+                Position = employee.rol_id,
             };
             using (var connection = new SqlConnection(_connectionString))
             {
