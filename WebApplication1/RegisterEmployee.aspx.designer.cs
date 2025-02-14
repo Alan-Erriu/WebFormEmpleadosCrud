@@ -105,6 +105,42 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txt_fecha_nacimiento;
 
         /// <summary>
+        /// Control lbl_agencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_agencia;
+
+        /// <summary>
+        /// Control txt_agencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_agencia;
+
+        /// <summary>
+        /// Control AgenciaEmpleo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::WebApplication1.PopUp.AgenciaEmpleo AgenciaEmpleo;
+
+        /// <summary>
+        /// Control btnAbrirPopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAbrirPopup;
+
+        /// <summary>
         /// Control Label1.
         /// </summary>
         /// <remarks>

@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegisterEmployee.aspx.cs" Inherits="WebApplication1.WebForm1" %>
+<%@ Register Src="~/PopUp/AgenciaEmpleo.ascx" TagName="AgenciaEmpleo" TagPrefix="pop1" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2 id="emailUserTitle"></h2>
     <br />
@@ -23,8 +26,23 @@
     <asp:TextBox ID="txt_numero_celular" runat="server" CssClass="form-control" placeholder="11235878454" TextMode="Number"></asp:TextBox>
     <asp:Label ID="lbl_fn" runat="server" Text="Ingrese su fecha de nacimiento"></asp:Label>
     <asp:TextBox ID="txt_fecha_nacimiento" runat="server" CssClass="form-control" placeholder="yyyy-dd-mm" TextMode="date"></asp:TextBox>
+
+
+    <asp:Label ID="lbl_agencia" runat="server" Text="Ingrese la agencia de empleo"></asp:Label>
+    <br />
+  
+    <asp:TextBox ID="txt_agencia" runat="server" CssClass="form-control" placeholder="Adecco"></asp:TextBox>
+      <br />
+    
+    <pop1:AgenciaEmpleo ID="AgenciaEmpleo" runat="server" />
+    <asp:Button ID="btnAbrirPopup" runat="server" Text="Buscar Agencia" CssClass="btn btn-primary" OnClick="btnAbrirPopup_Click" />
+      <br />
+      <br />
+    
     <asp:Label ID="Label1" runat="server" Text="Ingrese su puesto"></asp:Label>
     <asp:DropDownList ID="ddl_puestos" runat="server" CssClass="form-control" ></asp:DropDownList>
+
+
     <asp:Button ID="btn_crear"
         runat="server" CssClass="btn btn-success" 
         Text="Crear nuevo empleado" OnClick="btn_crear_Click" 

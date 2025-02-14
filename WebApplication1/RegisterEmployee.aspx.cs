@@ -12,7 +12,7 @@ namespace WebApplication1
     public partial class WebForm1 : System.Web.UI.Page
     {
         private readonly EmpleadoDAO employeeData = new EmpleadoDAO();
-        //no debería ver esto en la rama master
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,7 +25,7 @@ namespace WebApplication1
                 ddl_puestos.DataTextField = "descripcion";
                 ddl_puestos.DataBind();
                 updateEmployeesGrid(1);
-
+                AgenciaEmpleo.Visible = false;
             }
         }
 
@@ -170,6 +170,11 @@ namespace WebApplication1
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        protected void btnAbrirPopup_Click(object sender, EventArgs e)
+        {
+            AgenciaEmpleo.Visible = !AgenciaEmpleo.Visible;
         }
     }
 }
